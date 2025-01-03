@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Add.css'
 import { assets } from '../../assets/assets'
+import axios from "axios"
+import { toast } from 'react-toastify'
 
-const Add = () => {
-
+const Add = ({ url }) => {
     const [image, setImage] = useState(false);
     const [data, setData] = useState({
         name: "",
@@ -18,13 +19,32 @@ const Add = () => {
         setData(data => ({ ...data, [name]: value }))
     }
 
-    // useEffect(() => {
-    //     console.log(data);
-    // }, [data])
+    const onSubmitHandler = async (event) => {
+        event.preventDefault();
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("description", data.description);
+        formData.append("price", Number(data.price));
+        formData.append("category", data.category);
+        formData.append("image", image);
+        const response = await axios.post(`${url}/api/food/add`, formData);
+        if (response.data.success) {
+            setData({
+                name: "",
+                description: "",
+                price: "",
+                category: "Salad"
+            })
+            setImage(false)
+            toast.success(response.data.message);
+        } else {
+            toast.error(response.data.message);
+        }
+    }
 
     return (
         <div className='add'>
-            <form className='flex-col'>
+            <form className='flex-col' onSubmit={onSubmitHandler}>
                 <div className="add-image-upload flex-col">
                     <p>Tải ảnh</p>
                     <label htmlFor="image">
@@ -34,11 +54,11 @@ const Add = () => {
                 </div>
                 <div className="add-product-name flex-col">
                     <p>Tên sản phẩm</p>
-                    <input onChange={onChangeHandler} value={data.name} type="text" name='name' placeholder='Nhập tại đây' />
+                    <input onChange={onChangeHandler} value={data.name} type="text" name='name' placeholder='Nhập tại đây' required />
                 </div>
                 <div className="add-product-description flex-col">
                     <p>Mô tả sản phẩm</p>
-                    <textarea onChange={onChangeHandler} value={data.description} name="description" rows="6" placeholder='Viết mô tả tại đây'></textarea>
+                    <textarea onChange={onChangeHandler} value={data.description} name="description" rows="6" placeholder='Viết mô tả tại đây' required></textarea>
                 </div>
                 <div className="add-category-price">
                     <div className="add-category flex-col">
