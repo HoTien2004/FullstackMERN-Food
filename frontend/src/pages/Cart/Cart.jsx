@@ -59,7 +59,7 @@ const Cart = () => {
               <b>${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 2}</b>
             </div>
           </div>
-          <button onClick={() => navigate('./order')}>TIẾN HÀNH THANH TOÁN</button>
+          <button onClick={() => navigate('/order')}>TIẾN HÀNH THANH TOÁN</button>
         </div>
         <div className="cart-promo-code">
           <div>
