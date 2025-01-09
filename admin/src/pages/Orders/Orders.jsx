@@ -12,10 +12,18 @@ const Orders = ({ url }) => {
         const response = await axios.get(url + "/api/order/list");
         if (response.data.success) {
             setOrders(response.data.data);
-            console.log(response.data.data);
-
         } else {
             toast.error("Error");
+        }
+    }
+
+    const statusHandler = async (event, orderId) => {
+        const response = await axios.post(url + "/api/order/status", { orderId, status: event.target.value });
+        if (response.data.success) {
+            toast.success("Cập nhật trạng thái thành công!");
+            fetchAllOrders();
+        } else {
+            toast.error("Cập nhật trạng thái thất bại!");
         }
     }
 
@@ -48,7 +56,7 @@ const Orders = ({ url }) => {
                         </div>
                         <p>Số lượng : {order.items.length}</p>
                         <p>${order.amount}</p>
-                        <select>
+                        <select onChange={(event) => statusHandler(event, order._id)} value={order.status}>
                             <option value="Đang xử lý">Đang xử lý</option>
                             <option value="Đang giao hàng">Đang giao hàng</option>
                             <option value="Đã giao hàng">Đã giao hàng</option>
