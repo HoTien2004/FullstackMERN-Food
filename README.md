@@ -67,6 +67,10 @@ cd frontend
 npm run dev
 ```
 
+#### Database
+Sử dụng Mongo Compass để có giao diện trực quan
+
+
 ### Kết quả
 - Truy cập vào `http://localhost:3000` để xem giao diện người dùng.
 - Truy cập vào `http://localhost:4000` để xem server khởi chạy thành công hay không.
