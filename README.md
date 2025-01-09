@@ -68,7 +68,7 @@ npm run dev
 ```
 
 #### Database
-Sử dụng Mongo Compass để có giao diện trực quan
+Sử dụng MongoDB Compass để có giao diện trực quan
 
 
 ### Kết quả
