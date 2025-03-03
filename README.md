@@ -75,3 +75,7 @@ Sử dụng MongoDB Compass để có giao diện trực quan
 - Truy cập vào `http://localhost:3000` để xem giao diện người dùng.
 - Truy cập vào `http://localhost:4000` để xem server khởi chạy thành công hay không.
 - Truy cập vào `http://localhost:5000` để xem giao diện quản trị viên.
+### Live Demo
+```sh
+https://mern-food.netlify.app
+```
